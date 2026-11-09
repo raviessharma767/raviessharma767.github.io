@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>2BrothersAtelier</title>
+<script>
+// Meta sends ?products=<id>:<qty>,<id>:<qty>&coupon=CODE
+// Product IDs in our Meta catalog are Etsy listing IDs, so we open that listing on Etsy.
+(function () {
+  var shop = "https://2brothersatelier.etsy.com";
+  var target = shop;
+  try {
+    var p = new URLSearchParams(location.search).get("products") || "";
+    var first = decodeURIComponent(p).split(",")[0].split(":")[0].trim();
+    if (/^\d{6,}$/.test(first)) {
+      target = "https://www.etsy.com/listing/" + first;
+    }
+  } catch (e) {}
+  location.replace(target);
+})();
+</script>
+</head>
+<body>
+<p><a href="https://2brothersatelier.etsy.com">Continue to 2BrothersAtelier on Etsy</a></p>
+</body>
+</html>
